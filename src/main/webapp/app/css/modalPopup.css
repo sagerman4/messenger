@@ -1,0 +1,18 @@
+form.modalPopup {
+    padding: 0 1em 0 1em;
+}
+
+label {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+}
+
+.modal-header,
+.modal-body,
+.modal-footer {
+    padding: 1em 0 1em 0;
+}
+
+.flush-left {
+    padding-left: 0;
+}

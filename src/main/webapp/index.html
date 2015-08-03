@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html id="ng-app">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Messages</title>
+    <meta charset="utf-8"/>
+
+    <link type="text/css" rel="stylesheet" href="resources/bootstrap/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="resources/font-awesome/css/font-awesome.min.css"/>
+    <link type="text/css" rel="stylesheet" href="resources/animate/animate.css"/>
+    <link type="text/css" rel="stylesheet" href="resources/ui-smoothness/jquery-ui-1.11.0.css"/>
+    <link type="text/css" rel="stylesheet" href="app/css/app.css"/>
+    <script type="text/javascript" src="resources/jquery/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="resources/jquery/jquery-ui-1.11.0.js"></script>
+    <script type="text/javascript" src="resources/jquery/jquery.color.min.js"></script>
+    <script type="text/javascript" src="resources/jquery/jquery.event.drag-2.2.js?v=VERSION_TOKEN"></script>
+    <script type="text/javascript">var $j = jQuery.noConflict();</script>
+    <script type="text/javascript" src="resources/angular/angular.js"></script>
+    <script type="text/javascript" src="resources/ui-router/angular-ui-router.js"></script>
+    <script type="text/javascript" src="resources/angular-ui/ui-bootstrap-tpls-0.8.0.min.js"></script>
+    <script type="text/javascript" src="app/app.js"></script>
+  </head>
+  <body data-ng-app="messages">
+    <div class="navbar navbar-inverse navbar-fixed-top" data-ng-controller="NavController" data-ng-init="init()">
+      <div class="navbar-inner">
+
+        <a data-ui-sref="dashboard.overview" class="brand" style="font-weight: bold; color: white">&nbsp; Messages</a>
+        <ul class="nav">
+          <li class="dropdown" data-ng-class="{active: $state.includes('messages')}">
+            <a class="dropdown-toggle" data-toggle="dropdown" data-ui-sref="messages">Messages({{total}})</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container-fluid main-page-content">
+      <div class="row-fluid">
+        <div class="span12">
+            <div data-ui-view></div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer">
+      <p class="muted">
+        <small>Really Basic Useless Messages App</small>
+      </p>
+      <small class="muted">About</small>&nbsp;&nbsp;&nbsp;<span class="muted">-</span>&nbsp;&nbsp;&nbsp;
+      <small class="muted"><a class="muted" target="_blank" data-ui-sref="help">Documentation</a></small>&nbsp;&nbsp;&nbsp;<span class="muted">-</span>&nbsp;&nbsp;&nbsp;
+      <small class="muted"><a class="muted" target="_blank" data-ui-sref="support">Support</a></small>&nbsp;&nbsp;&nbsp;
+
+      <h4 class="muted">Messages</h4>
+
+    </footer>
+    <div class="loading-widget loading-overlay" style="display: none">
+      <div class="loading-image"></div>
+    </div>
+  </body>
+</html>
