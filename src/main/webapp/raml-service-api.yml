@@ -1,0 +1,127 @@
+title: Force Reference
+version: 1
+mediaType: application/json 
+protocols: [HTTPS] 
+baseUri: https://{bucketName}.logsa.army.mil/force-reference/api
+baseUriParameters:
+  bucketName:
+    description: The name of the bucket (liwint, liwfun, liw)
+/authorizationcodes:
+       type: collection
+       get:
+        description: Retrieve all Authorization Codes
+        responses:
+         200:
+           body:
+             application/json:
+              example: |
+                 {
+                   "data": [{
+                     "typeCode": "xxxxx",
+                     "typeCodeDescription": "xxxxx"
+                   }], 
+                   "success": true,
+                   "status": 200
+                 }
+/branches:
+       type: collection
+       get:
+        description: Retrieve all branches
+        responses:
+         200:
+           body:
+             application/json:
+              example: |
+                 {
+                   "data": [{
+                     "code": "xxxxx",
+                     "description": "xxxxx"
+                   }], 
+                   "success": true,
+                   "status": 200
+                 }
+/commandassigncodes:
+       type: collection
+       get:
+        description: Retrieve all Command Assignment Codes
+        responses:
+         200:
+           body:
+             application/json:
+              example: |
+                 {
+                   "data": [{
+                     "code": "xxxxx",
+                     "description": "xxxxx"
+                   }], 
+                   "success": true,
+                   "status": 200
+                 }
+/componentcodes:
+       type: collection
+       get:
+        description: Retrieve all Component Codes
+        responses:
+         200:
+           body:
+             application/json:
+              example: |
+                 {
+                   "data": [{
+                     "code": "xxxxx",
+                     "description": "xxxxx"
+                   }], 
+                   "success": true,
+                   "status": 200
+                 }
+/locations:
+       type: collection
+       get:
+        description: Retrieve all Location Codes
+        responses:
+         200:
+           body:
+             application/json:
+              example: |
+                 {
+                   "data": [{
+                     "code": "xxxxx",
+                     "description": "xxxxx",
+                     "conusOconus": "y"
+                   }], 
+                   "success": true,
+                   "status": 200
+                 }
+/macoms:
+       type: collection
+       get:
+        description: Retrieve all Macoms
+        responses:
+         200:
+           body:
+             application/json:
+              example: |
+                 {
+                   "data": [{
+                     "macom": "xxxxx",
+                     "description": "xxxxx"
+                   }], 
+                   "success": true,
+                   "status": 200
+                 }
+/unitnumbers:
+       type: collection
+       get:
+        description: Retrieve all Unit Numbers
+        responses:
+         200:
+           body:
+             application/json:
+              example: |
+                 {
+                   "data": [{
+                     "unitNumber": "xxxxx"
+                   }], 
+                   "success": true,
+                   "status": 200
+                 }
