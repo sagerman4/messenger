@@ -3,15 +3,15 @@ package messages.model;
 public class Message {
     private String id;
     private String subject;
-    private String message;
+    private String body;
 
     public Message() {
     }
 
-    public Message(final String id, final String subject, final String message) {
+    public Message(final String id, final String subject, final String body) {
         this.id = id;
         this.subject = subject;
-        this.message = message;
+        this.body = body;
     }
 
     public String getSubject() {
@@ -22,12 +22,12 @@ public class Message {
         this.subject = subject;
     }
 
-    public String getMessage() {
-        return message;
+    public String getBody() {
+        return body;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setBody (String body) {
+        this.body = body;
     }
 
     public String getId() {

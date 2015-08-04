@@ -43,7 +43,7 @@ messages.service('MessagesService', function ($http) {
     };
     
     this.createMessage = function (subject, body) {
-        return $http.post("api/messages", {subject: subject, message: body}).then(function success(response) {
+        return $http.post("api/messages", {subject: subject, body: body}).then(function success(response) {
             return response;
         });
     };

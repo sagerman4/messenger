@@ -15,7 +15,7 @@
                {{message.subject}}
             </td>
             <td data-ng-click="selectMessage(message)">
-               {{message.message.slice(0,20)}}...
+               {{message.body.slice(0,20)}}...
             </td>
             <td>
                 <a data-ng-click="removeMessage(message)" style="color:red;"><i class="icon-trash"></i></a>
@@ -26,7 +26,7 @@
     <div class="span6" data-ng-show="selectedMessage">
         <div class="well">
             <h3>{{selectedMessage.subject}}</h3>
-            <p>{{selectedMessage.message}}</p>
+            <p>{{selectedMessage.body}}</p>
         </div>
     </div>
 </div>
