@@ -238,3 +238,16 @@ footer {
 input[type="text"].ng-invalid-minlength, input[type="text"].ng-invalid-maxlength{
     color: red;
 }
+
+.row-hover tr:hover td {
+    background-color:#F5F5F5 !important;
+    cursor: pointer;
+}
+
+.row-hover tr a{
+  visibility:hidden;
+}
+
+.row-hover tr:hover a {
+ visibility:visible;
+}

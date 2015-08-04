@@ -1,99 +1,59 @@
-package mil.army.logsa.reference.rest;
+package messages.rest;
 
+import messages.model.Message;
 import com.google.gson.Gson;
-import java.util.List;
+import java.util.Collection;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import mil.army.logsa.reference.managers.ReferenceManager;
-import mil.army.logsa.reference.model.AuthorizationCode;
-import mil.army.logsa.reference.model.Branch;
-import mil.army.logsa.reference.model.CommandAssignmentCode;
-import mil.army.logsa.reference.model.ComponentCode;
-import mil.army.logsa.reference.model.Macom;
-import mil.army.logsa.reference.model.LocationCode;
-import mil.army.logsa.reference.model.UnitNumber;
+import messages.managers.MessagesManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-/**
-/**
- *
- * @author jason.t.murphree
- */
 
-@Path("reference")
+@Path("messages")
 @Component
-public class ReferenceService {
+public class MessagesService {
        
     @Autowired
-    private ReferenceManager referenceManager;
+    private MessagesManager messagesManager;
    
     @GET
-    @Path("authorizationcodes")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAuthorizationCodes(){
-        List<AuthorizationCode> result = referenceManager.getAuthorizationCodes();
-        return Response.ok(new Gson().toJson(result)).build();
+    public Response getMessages(){
+        final Collection<Message> messages = messagesManager.getMessages();
+        return Response.ok(new Gson().toJson(messages)).build();
     }
     
     @GET
-    @Path("branches")
+    @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getBranches(){
-        List<Branch> result = referenceManager.getBranches();
-        return Response.ok(new Gson().toJson(result)).build();
+    public Response getMessages(@PathParam("id") final String id){
+        final Message message = messagesManager.getMessage(id);
+        return Response.ok(new Gson().toJson(message)).build();
     }
     
-    @GET
-    @Path("commandassigncodes")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCommandAssignmentCodes(){
-        List<CommandAssignmentCode> result = referenceManager.getCommandAssignmentCodes();
-        return Response.ok(new Gson().toJson(result)).build();
+    public Response createMessage(final String params){
+        final Message message = new Gson().fromJson(params, Message.class);
+        final String id = messagesManager.createMessage(message);
+        return Response.ok(new Gson().toJson(id)).build();
     }
     
-    @GET
-    @Path("componentcodes")
+    @Path("{id}")
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getComponentCodes(){
-        List<ComponentCode> result = referenceManager.getComponentCodes();
-        return Response.ok(new Gson().toJson(result)).build();
+    public Response removeMessage(@PathParam("id") final String id)
+    {
+        messagesManager.removeMessage(id);
+        return Response.ok().build();
     }
-    
-    @GET
-    @Path("locations")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getStateAndCountryCodes(){
-         List<LocationCode> result = referenceManager.getLocationCodes();
-        return Response.ok(new Gson().toJson(result)).build();
-
-    }
-    
-    @GET
-    @Path("macoms")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getMacoms() {
-       final List<Macom> result = referenceManager.getMacoms();
-       return Response.ok(new Gson().toJson(result)).build();
-       
-    }
-    
-    @GET
-    @Path("unitnumbers")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getUnitNumbers(){
-        List<UnitNumber> result = referenceManager.getUnitNumbers();
-        return Response.ok(new Gson().toJson(result)).build();
-    }
-    
-//    @POST
-//    @Path("geocodes")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Response getGeoCodes(final String params){
-//        final GeoCodesParams geoCodesParams = new Gson().fromJson(params, GeoCodesParams.class);
-//        List<GeoCode> result = referenceManager.getGeoCodes(geoCodesParams.getStateCountryCodes());
-//        return Response.ok(new Gson().toJson(result)).build();
-//    }
 }

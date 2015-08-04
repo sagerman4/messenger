@@ -3,7 +3,8 @@ var messages = angular.module('messages', ['ui.router', 'ui.bootstrap']);
 messages.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider) {
     $urlRouterProvider.otherwise("/messages");
     $stateProvider
-          .state('messages', {url: "/messages", templateUrl: "messages.html"});
+          .state('messages', {url: "/messages", templateUrl: "messages.html"})
+          .state('new', {url: "/new", templateUrl: "new.html"});
   }]);
 
 messages.controller('NavController', ['$scope', '$state', 'MessagesNumberService', function($scope, $state, MessagesNumberService) {
@@ -35,19 +36,22 @@ messages.service('MessagesNumberService', function ($http) {
 messages.service('MessagesService', function ($http) {
     this.getMessages = function () {
         return $http.get("api/messages").then(function success(response) {
-            return response;
+//            return response.data;
+            return [{id: '1', subject: 'whatup', message: 'Hey, I was just contacting you to see if you knew what is up.  Let me know.'},
+                    {id: '2', subject: 'Hey', message: 'Hey! Just saying hey.'},
+                    {id: '3', subject: 'Insurance', message: 'Hello Sir, I was just wondering if you would like to change your insurance. Call me.'}];
         });
     };
     
     this.getMessage = function (id) {
         return $http.get("api/messages/" + id).then(function success(response) {
-            return response;
+            return response.data;
         });
     };
     
     this.removeMessage = function (id) {
         return $http.delete("api/messages/" + id).then(function success(response) {
-            return response;
+            return response.data;
         });
     };
     
@@ -57,10 +61,31 @@ messages.service('MessagesService', function ($http) {
         });
     };
 });
+
 messages.controller('MessagesController', ['$scope', '$state', 'MessagesService', function($scope, $state, MessagesService){
     $scope.init = function() {
-        
+       MessagesService.getMessages().then(function(data){
+          $scope.messages = data; 
+       }); 
     }; 
+    
+    $scope.selectMessage = function(message) {
+       $scope.selectedMessage = message;  
+    };
+    
+    $scope.removeMessage = function(message) {
+       MessagesService.removeMessage(message.id).then(function(response){
+         MessagesService.getMessages().then(function(data){
+           $scope.messages = data; 
+         });  
+       });
+    };
+}]);
+
+messages.controller('NewMessageController', ['$scope', '$state', 'MessagesService', function($scope, $state, MessagesService){
+    $scope.createMessage = function(message) {
+       MessagesService.createMessage(message);
+    };
 }]);
 
 messages.provider('requestNotification', function() {

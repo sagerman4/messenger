@@ -30,6 +30,11 @@
             <a class="dropdown-toggle" data-toggle="dropdown" data-ui-sref="messages">Messages({{total}})</a>
           </li>
         </ul>
+        <ul class="nav">
+          <li class="dropdown" data-ng-class="{active: $state.includes('new')}">
+            <a class="dropdown-toggle" data-toggle="dropdown" data-ui-sref="new">New</a>
+          </li>
+        </ul>
       </div>
     </div>
 

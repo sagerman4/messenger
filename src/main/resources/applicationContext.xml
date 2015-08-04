@@ -9,10 +9,6 @@
             Enable annotation scanning (e.g., for @Autowired, @Component, etc.)
     -->
     <context:annotation-config />
-    <context:component-scan base-package="mil.army.logsa.reference.branches" />
-
-    <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-        <property name="jndiName" value="jdbc/referenceDS"/>
-    </bean>
+    <context:component-scan base-package="messages" />
     
 </beans>
