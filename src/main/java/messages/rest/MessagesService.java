@@ -42,6 +42,7 @@ public class MessagesService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createMessage(final String params){
+        System.out.println("params:  " + params);
         final Message message = new Gson().fromJson(params, Message.class);
         final String id = messagesManager.createMessage(message);
         return Response.ok(new Gson().toJson(id)).build();

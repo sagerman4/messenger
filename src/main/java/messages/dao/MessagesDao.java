@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import messages.dao.MessageRepository;
 import messages.model.Message;
 
 @Component
@@ -22,6 +21,7 @@ public class MessagesDao
     {
         final UUID uuid = UUID.randomUUID();
         final String id = uuid.toString();
+        message.setId(id);
         repo.addMessage(id, message);
         return id;
     }

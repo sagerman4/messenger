@@ -26,6 +26,7 @@ public class MessageRepository {
     
     public void addMessage(final String id, final Message message)
     {
+        System.out.println("Adding:  " + message.getSubject());
         repository.put(id, message);
     }
     

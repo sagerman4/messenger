@@ -27,7 +27,6 @@ messages.controller('NavController', ['$scope', '$state', 'MessagesNumberService
 messages.service('MessagesNumberService', function ($http) {
     this.getMessages = function () {
         return $http.get("api/messages").then(function success(response) {
-            console.log("response", response);
             return response.data.length;
         });
     };
@@ -36,10 +35,10 @@ messages.service('MessagesNumberService', function ($http) {
 messages.service('MessagesService', function ($http) {
     this.getMessages = function () {
         return $http.get("api/messages").then(function success(response) {
-//            return response.data;
-            return [{id: '1', subject: 'whatup', message: 'Hey, I was just contacting you to see if you knew what is up.  Let me know.'},
-                    {id: '2', subject: 'Hey', message: 'Hey! Just saying hey.'},
-                    {id: '3', subject: 'Insurance', message: 'Hello Sir, I was just wondering if you would like to change your insurance. Call me.'}];
+            return response.data;
+//            return [{id: '1', subject: 'whatup', message: 'Hey, I was just contacting you to see if you knew what is up.  Let me know.'},
+//                    {id: '2', subject: 'Hey', message: 'Hey! Just saying hey.'},
+//                    {id: '3', subject: 'Insurance', message: 'Hello Sir, I was just wondering if you would like to change your insurance. Call me.'}];
         });
     };
     
@@ -74,6 +73,7 @@ messages.controller('MessagesController', ['$scope', '$state', 'MessagesService'
     };
     
     $scope.removeMessage = function(message) {
+        console.log('remove this:  ' + message.subject);
        MessagesService.removeMessage(message.id).then(function(response){
          MessagesService.getMessages().then(function(data){
            $scope.messages = data; 
@@ -83,8 +83,10 @@ messages.controller('MessagesController', ['$scope', '$state', 'MessagesService'
 }]);
 
 messages.controller('NewMessageController', ['$scope', '$state', 'MessagesService', function($scope, $state, MessagesService){
-    $scope.createMessage = function(message) {
-       MessagesService.createMessage(message);
+    $scope.createMessage = function() {
+       MessagesService.createMessage($scope.subject, $scope.body).then(function(response){
+           $state.go('messages');
+       });
     };
 }]);
 
